@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns = "http://www.springframework.org/schema/beans"
+   xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation = "http://www.springframework.org/schema/beans
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+   
+   <!-- below you will find a collection of bean's properties -->
+   <!-- arguments must be enclosed in quotation marks -->
+   <!-- 1)Id: the unique identfier for a bean  -->
+   <!-- 2)class: reference to the java class -->
+   <!-- 3)lazy-init : true or false -->
+   <!-- 4)init-method : method to be called on bean initialization-->
+   <!-- this property must call a method that has a void no-argument signature -->
+   <!-- beans NOT using this property must implements "InitializingBean"'s method "afterPropertiesSet()" -->
+   <!-- if they need to perform an action upon creation, but it is not recommended -->
+   <!-- 5)destroy-method: method to be called upon bean destruction -->
+   <!-- this property must call a method that has a void no-argument signature -->
+   <!-- beans NOT using this property must implements "DisposableBean"'s method "destroy()" -->
+   <!-- if they need to perform an action upon destruction, but it is not recommended -->
+   <!-- 6)scope: singleton,prototype,request,session,global-session -->
+   <!-- singleton: the bean is shared across all instances -->
+   <!-- prototype: the bean is duplicated for every instance -->
+   <!-- 7)global properties: default-init-method, default-destroy-method -->
+   <!-- global properties have to be set in the <beans> tag  -->
+   <!-- 8)parent: this clas is a children of a specific class,and will inerit it's properties -->
+   <!-- child classes may override parents properties -->
+   <!-- albeit similar, this is independent from java's ineritance system -->
+   <!-- abstract: boolean. this define an abstract definition template, it's like an imaginary class -->
+   <!-- whose properties can be used by it's children. no class shall be defined when this property is used -->
+   
+   
+   <!-- property tag options -->
+   <!-- a property tag can  be used to inject attributes inside a bean -->
+   <!-- a property tag can be used to inject a class inside another one via proper definition -->
+   <!-- the class to be injected NEED a contructor or a setter method available for injection -->
+   <!-- (see example below for a clas injection) -->
+   <!-- property can be used to inject collection of items: list, set, map, prop -->
+   <!-- 1)list: declare a list using the <list> tag, then declare the values using the <value> tag -->
+   <!-- 2)set: declare a set using the <set> tag, then declare the values using the <value> tag -->
+   <!-- 3)map: declare a list using the <map> tag, then declare the values using the <entry> tag -->
+   <!-- <entry> tag usage: <entry key = "key" value = "entryValue"/>-->
+   <!-- 4)prop: declare a collection of string-string values using the <prop> tag-->
+   <!-- then declare the values using the <prop> tag -->
+   <!-- <prop> tag usage: <prop key = "valoreChiave"> secondoValore </prop> -->
+   <!-- It is possible to inject references to other beans as well -->
+   <!-- using the <ref bean = "referencedBean"> tag for sets and lists -->
+   <!-- using the value-ref attribute of the <entry> tag for maps -->
+   
+   <!-- autowired configuration -->
+   <!-- just uncomment the following line: -->
+   <!-- <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> -->
+   <!-- then use the @autowired annotation when you need to wire a bean to a method\class\attribute -->
+   <!-- dependecy checking can be disable by setting the property (required=false) -->
+   <!-- you can use the @qualifier annotation to choose from multiple definitions of a bean (es:from a list) -->
+   <!-- the @configuration annotation can be used to declare a java class as a bean source -->
+   <!-- the @bean annotation can be used to declare that a method\attribute is a bean -->
+   <!-- NOTE: the .xml configuration supersedes any annotation -->
+   
+  
+   
+   <!-- a bean class can also be used for postprocessing another bean -->
+   <!-- <bean class = "com.tutorialpoint.InitHelloWorld" />  -->
+
+	<!-- example of a template definition -->
+	<bean id = "abstractBean" abstract = "true">
+		<property name = "attributeName" value = "i am an attribute!" />
+		
+		<!-- a bean can have defined inside him another bean, wich is called a "inner bean" -->
+		<!-- an "inner bean" must be declared inside a property tag -->
+		<property name="targetAttribute">
+			<bean id = "innerBean" abstract = "true"></bean>
+		</property>
+	</bean>
+</beans>
