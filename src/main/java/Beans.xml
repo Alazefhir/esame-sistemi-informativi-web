@@ -1,9 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!--  <context:component-scan base-package="it.uniromatre" /> -->
+
 <beans xmlns = "http://www.springframework.org/schema/beans"
    xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:context = "http://www.springframework.org/schema/context"
    xsi:schemaLocation = "http://www.springframework.org/schema/beans
-   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+   http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/context
+   http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+   <context:annotation-config/>
    
    <!-- below you will find a collection of bean's properties -->
    <!-- arguments must be enclosed in quotation marks -->
@@ -57,19 +64,35 @@
    <!-- the @bean annotation can be used to declare that a method\attribute is a bean -->
    <!-- NOTE: the .xml configuration supersedes any annotation -->
    
-  
+   <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
    
-   <!-- a bean class can also be used for postprocessing another bean -->
-   <!-- <bean class = "com.tutorialpoint.InitHelloWorld" />  -->
-
-	<!-- example of a template definition -->
-	<bean id = "abstractBean" abstract = "true">
-		<property name = "attributeName" value = "i am an attribute!" />
+	
+	<!-- bean configuration -->
+	
+	<!-- <bean id = "opera" class = "it.uniromatre.model.Opera" ></bean> -->
+	<!-- <bean id = "autore" class = "it.uniromatre.model.Autore" ></bean> -->
+	
+	<bean id="entitymanager" class = "it.uniromatre.service.EntityManagerFactoryUnit" init-method= "init"
+		destroy-method="destroy" scope = "singleton" autowire = "byName">
 		
-		<!-- a bean can have defined inside him another bean, wich is called a "inner bean" -->
-		<!-- an "inner bean" must be declared inside a property tag -->
-		<property name="targetAttribute">
-			<bean id = "innerBean" abstract = "true"></bean>
-		</property>
+		<property name="persistenceUnit" value = "esercitazione-jpa-unit"></property>
 	</bean>
+	
+	<bean id = "crud" class = "it.uniromatre.service.OpereRepository" scope = "singleton" init-method = "init" ></bean>
+	
+	<bean id = "opereservice" class = "it.uniromatre.service.OpereService" scope = "singleton" 
+		init-method= "init">
+	</bean>
+	
+	
+	<!-- database access configuration -->
+	
+	<bean id = "dataSource" 
+   		class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
+  		<property name = "driverClassName" value = "org.postgresql.Driver"/>
+   		<property name = "url" value = "jdbc:postgresql://localhost/museo"/>
+   		<property name = "username" value = "postgres"/>
+  		<property name = "password" value = "postgres"/>
+	</bean>
+	
 </beans>
