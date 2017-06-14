@@ -35,6 +35,7 @@
    <!-- albeit similar, this is independent from java's ineritance system -->
    <!-- abstract: boolean. this define an abstract definition template, it's like an imaginary class -->
    <!-- whose properties can be used by it's children. no class shall be defined when this property is used -->
+   <!-- 9)abstract: true|false. il bean è astratto e non si riferisce a nessuna classe java -->
    
    
    <!-- property tag options -->
@@ -69,20 +70,27 @@
 	
 	<!-- bean configuration -->
 	
-	<!-- <bean id = "opera" class = "it.uniromatre.model.Opera" ></bean> -->
-	<!-- <bean id = "autore" class = "it.uniromatre.model.Autore" ></bean> -->
-	
-	<bean id="entitymanager" class = "it.uniromatre.service.EntityManagerFactoryUnit" init-method= "init"
+	<bean id="entitymanager" class = "it.uniromatre.persistence.EntityManagerFactoryUnit" init-method= "init"
 		destroy-method="destroy" scope = "singleton" autowire = "byName">
 		
 		<property name="persistenceUnit" value = "esercitazione-jpa-unit"></property>
 	</bean>
 	
-	<bean id = "crud" class = "it.uniromatre.service.OpereRepository" scope = "singleton" init-method = "init" ></bean>
+	<bean id = "operecrud" class = "it.uniromatre.persistence.OpereRepository" scope = "singleton" init-method = "init" ></bean>
 	
-	<bean id = "opereservice" class = "it.uniromatre.service.OpereService" scope = "singleton" 
+	<bean id = "autoricrud" class = "it.uniromatre.persistence.AutoriRepository" scope = "singleton" init-method = "init" ></bean>
+	
+	<!-- <bean id = "service" class ="it.uniromatre.service.BasicService" abstract = "true"></bean> -->
+	
+	<bean id = "autoriservice" class = "it.uniromatre.service.AutoriService" scope = "singleton"
+		init-method= "init">
+	</bean>	
+	 
+	 <bean id = "opereservice" class = "it.uniromatre.service.OpereService" scope = "singleton" 
 		init-method= "init">
 	</bean>
+	
+	
 	
 	
 	<!-- database access configuration -->

@@ -1,4 +1,4 @@
-package it.uniromatre.service;
+package it.uniromatre.persistence;
 
 import java.util.List;
 

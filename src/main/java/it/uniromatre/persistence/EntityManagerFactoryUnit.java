@@ -1,4 +1,4 @@
-package it.uniromatre.service;
+package it.uniromatre.persistence;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;

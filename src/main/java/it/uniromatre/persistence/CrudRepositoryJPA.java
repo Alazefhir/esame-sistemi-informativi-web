@@ -1,4 +1,4 @@
-package it.uniromatre.service;
+package it.uniromatre.persistence;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -26,29 +26,8 @@ public class CrudRepositoryJPA<T> implements CrudRepository<T> {
 	
 	@PostConstruct
 	public void init(){
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println(emfu.toString());
-		System.out.println("wtf");
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
 		
 		this.em = this.emfu.getEm();
-	
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println(em.toString());
-		System.out.println("wtf^2");
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
 	}
 	
 	public EntityManagerFactoryUnit getEmfu() {
@@ -121,7 +100,7 @@ public class CrudRepositoryJPA<T> implements CrudRepository<T> {
 	
 	public List<T> findAttribute (String attribute) {
 		Query query = this.em.createQuery
-				("Select e From " + this.entityClass.getName() + " e WHERE e." + attribute + " o ORDER BY o" );
+				("Select e." + attribute + " From " + this.entityClass.getName() + " e ORDER BY e." + attribute );
 		return query.getResultList();
 		
 	}

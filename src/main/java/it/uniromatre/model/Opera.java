@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.PreRemove;
 
 @Entity
 public class Opera {
@@ -21,7 +22,7 @@ public class Opera {
 	@Column (nullable = false)
 	private String descrizione;
 	
-	@ManyToOne (cascade = CascadeType.ALL)
+	@ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
 	private Autore autore;
 	
 	public Opera (){}
@@ -56,5 +57,24 @@ public class Opera {
 
 	public void setAutore(Autore autore) {
 		this.autore = autore;
+	}
+	
+	@Override
+	public String toString(){
+		
+		return "Nome: " + this.nome + " Descrizione: " + this.descrizione + " id: " + this.id + " autore: " + 
+				 this.autore.toStringPlain();
+	}
+
+	public String toStringPlain() {
+		
+		return "Nome: " + this.nome + " Descrizione: " + this.descrizione + " id: " + this.id ;
+	}
+	
+	@PreRemove
+	public void preremove(){
+		
+		this.autore.getOpera().remove(this);
+		
 	}
 }

@@ -1,14 +1,14 @@
 package it.uniromatre.service;
 
-import it.uniromatre.model.Opera;
+import it.uniromatre.model.Autore;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OpereService extends BasicService<Opera> {
+public class AutoriService extends BasicService<Autore> {
 
 	@Autowired
-	public OpereService () {
-		super (Opera.class);
+	public AutoriService () {
+		super (Autore.class);
 	}
 }
