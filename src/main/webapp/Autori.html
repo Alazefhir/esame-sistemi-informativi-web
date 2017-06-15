@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Layout</title>
+</head>
+<body>
+	<h1>Lista Autori</h1>
+	<table>
+		<tr>
+			<th>Nome</th>
+			<th>Cognome</th>
+			<th>Nazionalità</th>
+			<th>Data Nascita</th>
+			<th>Data Morte</th>
+		</tr>
+		<tr th:each="autore: ${autori}">
+			<td th:text="${autore.id}"></td>
+			<td th:text="${autore.nome}"></td>
+			<td th:text="${autore.cognome}"></td>
+			<td th:text="${autore.nazionalità}"></td>
+			<td th:text="${#dates.format(autore.dataNascita, 'dd/MM/yyyy')}"></td>
+			<td th:text="${#dates.format(autore.dataMorte, 'dd/MM/yyyy')}"></td>
+			<td><a th:href="@{/autore/edit/{id}(id=${autore.id})}">Modifica</a></td>
+			<td><a th:href="@{/autore/delete/{id}(id=${autore.id})}">Cancella</a></td>
+		</tr>
+		</table>
+		<div>
+			<a class="btn btn-sm btn-success" th:href="@{/autore/add}">Aggiungi</a>
+		</div>
+		<p>
+			<a href="prelayout.html" th:href="@{/prelayout}">Return to Layout</a>
+		</p>
+</body>
+</html>

@@ -15,7 +15,7 @@ import it.uniromatre.service.AutoriService;
 
 
 
-public class TestMain {
+public class TestMainForm {
 
 	
 	

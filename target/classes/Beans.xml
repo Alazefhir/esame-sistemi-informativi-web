@@ -103,4 +103,15 @@
   		<property name = "password" value = "postgres"/>
 	</bean>
 	
+	<!-- ViewResolver -->
+	
+	<bean id="viewResolver"
+      class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
+              <property name="prefix">
+                  <value>/templates/</value>
+              </property>
+              <property name="suffix">
+                 <value>.html</value>
+             </property>
+        </bean>
 </beans>

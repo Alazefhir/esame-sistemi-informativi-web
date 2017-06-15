@@ -1,6 +1,7 @@
 package it.uniromatre.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -22,10 +23,26 @@ public class Autore {
 	private Long id;
 	@Column (nullable = false)
 	private String nome;
+	@Column (nullable = false)
+	private String cognome;
+	@Column (nullable = false)
+	private String nazionalità;
+	@Column (nullable = false)
+	private Date dataNascita;
+	@Column (nullable = false)
+	private Date dataMorte;
 	@OneToMany (mappedBy = "autore",cascade = {CascadeType.REMOVE,CascadeType.REFRESH})
 	private List <Opera> opera;
 	
 	public Autore() {}
+	
+	public Autore(String nome, String cognome, String nazionalità, Date dataNascita, Date dataMorte){
+		this.nome = nome;
+		this.cognome = cognome;
+		this.nazionalità = nazionalità;
+		this.dataNascita = dataNascita;
+		this.dataMorte = dataMorte;
+	}
 	
 	public Long getId() {
 		return id;
@@ -38,6 +55,38 @@ public class Autore {
 	}
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getCognome() {
+		return cognome;
+	}
+
+	public void setCognome(String cognome) {
+		this.cognome = cognome;
+	}
+
+	public String getNazionalità() {
+		return nazionalità;
+	}
+
+	public void setNazionalità(String nazionalità) {
+		this.nazionalità = nazionalità;
+	}
+
+	public Date getDataNascita() {
+		return dataNascita;
+	}
+
+	public void setDataNascita(Date dataNascita) {
+		this.dataNascita = dataNascita;
+	}
+
+	public Date getDataMorte() {
+		return dataMorte;
+	}
+
+	public void setDataMorte(Date dataMorte) {
+		this.dataMorte = dataMorte;
 	}
 
 	public List<Opera> getOpera() {

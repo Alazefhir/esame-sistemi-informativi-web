@@ -17,15 +17,29 @@ public class Opera {
 	private Long id;
 
 	@Column (nullable = false)
-	private String nome;
+	private String titolo;
+	
+	@Column (nullable = false)
+	private Integer anno;
 
 	@Column (nullable = false)
-	private String descrizione;
+	private String tecnica;
+	
+	@Column (nullable=false)
+	private String dimensione;
 	
 	@ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
 	private Autore autore;
 	
 	public Opera (){}
+	
+	public Opera (String titolo, Integer anno, String tecnica, String dimensione, Autore autore) {
+		this.titolo = titolo;
+		this.anno = anno;
+		this.tecnica = tecnica;
+		this.dimensione = dimensione;
+		this.autore = autore;
+	}
 
 	public Long getId() {
 		return id;
@@ -35,22 +49,38 @@ public class Opera {
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
+	public String getTitolo() {
+		return titolo;
 	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
+	public void setTitolo(String titolo) {
+		this.titolo = titolo;
 	}
 
-	public String getDescrizione() {
-		return descrizione;
+	public Integer getAnno() {
+		return anno;
 	}
 
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+	public void setAnno(Integer anno) {
+		this.anno = anno;
 	}
 
+	public String getTecnica() {
+		return tecnica;
+	}
+
+	public void setTecnica(String tecnica) {
+		this.tecnica = tecnica;
+	}
+
+	public String getDimensione() {
+		return dimensione;
+	}
+
+	public void setDimensione(String dimensione) {
+		this.dimensione = dimensione;
+	}
+	
 	public Autore getAutore() {
 		return autore;
 	}
@@ -62,13 +92,13 @@ public class Opera {
 	@Override
 	public String toString(){
 		
-		return "Nome: " + this.nome + " Descrizione: " + this.descrizione + " id: " + this.id + " autore: " + 
+		return "Titolo: " + this.titolo + " Anno: " + this.anno + "Tecnica: " + this.tecnica + "Dimensione: " + this.dimensione + "id: " + this.id + " autore: " + 
 				 this.autore.toStringPlain();
 	}
 
 	public String toStringPlain() {
 		
-		return "Nome: " + this.nome + " Descrizione: " + this.descrizione + " id: " + this.id ;
+		return "Titolo: " + this.titolo + " Anno: " + this.anno + "Tecnica: " + this.tecnica + "Dimensione: " + this.dimensione + "id: " + this.id ;
 	}
 	
 	@PreRemove
