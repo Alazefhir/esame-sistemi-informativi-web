@@ -1,14 +1,22 @@
 package it.uniromatre.test;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.transaction.HeuristicMixedException;
+import javax.transaction.HeuristicRollbackException;
+import javax.transaction.NotSupportedException;
+import javax.transaction.RollbackException;
+import javax.transaction.SystemException;
+
+import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
+import org.springframework.test.context.ContextConfiguration;
 
 import it.uniromatre.model.Autore;
 import it.uniromatre.model.Opera;
-import it.uniromatre.persistence.EntityManagerFactoryUnit;
 import it.uniromatre.service.BasicService;
 import it.uniromatre.service.OpereService;
 import it.uniromatre.service.AutoriService;
@@ -20,13 +28,14 @@ public class TestMain {
 	
 	
 	public static void main(String[] args) {
-		// OperaODO Auto-generated method stub
-		
+
+		//a @ContextConfiguration(locations = { "beans.xml" }) can be used as annotation
 		AbstractApplicationContext context = new ClassPathXmlApplicationContext("Beans.xml");
-		EntityManagerFactoryUnit emf = (EntityManagerFactoryUnit) context.getBean("entitymanager");
+
+		//deprecated
+		//EntityManagerFactoryUnit emf = (EntityManagerFactoryUnit) context.getBean("entitymanager");
 		BasicService service = (OpereService) context.getBean("opereservice");
 		BasicService serviceAutore = (AutoriService) context.getBean("autoriservice");
-		//OpereRepository repository = (OpereRepository) context.getBean("crud");
 		
 		
 		Autore autore1 = new Autore();
@@ -65,16 +74,7 @@ public class TestMain {
 		service.inserisci(opera4);
 		serviceAutore.inserisci(autore3);
 		
-		List<Opera> opere = new ArrayList<Opera>();
-		
-		/*opere = service.getAll();
-		
-		//visualizzazione della query
-		System.out.println();
-		
-		for(Opera operaIterativa: opere){
-			System.out.println(operaIterativa.toString());
-		}*/
+		List<Opera> opere;
 		
 		System.out.println();
 		
@@ -92,7 +92,6 @@ public class TestMain {
 		System.out.println();
 		
 		
-		//questo metodo ritorna un errore, è da rivedere
 		//sort
 		List<Opera> opere2 = (List<Opera>) service.getByAttribute(attribute);
 
@@ -102,23 +101,22 @@ public class TestMain {
 		for(Opera operaIterativa2: opere2){
 				System.out.println(operaIterativa2);
 		}
-		
-		
 		System.out.println();
 		
 		//pulizia database
 		
 		service.delete(opera1);
-		service.delete(opera2);
-		service.delete(opera3);
-		service.delete(opera4);
+		service.delete(opera2.getId());
+		service.delete(opera3.getId());
+		service.delete(opera4.getId());
 		
-		serviceAutore.delete(autore1);
-		serviceAutore.delete(autore2);
-		serviceAutore.delete(autore3);
+		serviceAutore.delete(autore1.getId());
+		serviceAutore.delete(autore2.getId());
+		serviceAutore.delete(autore3.getId());
 		
 		context.registerShutdownHook();
 		context.close();
+		
 	}
 
 }

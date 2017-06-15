@@ -10,4 +10,5 @@ public interface ServiceInterface <T> {
 	public List <T> getByAttribute(String s);
 	public T getOne(Long id);
 	public void delete(T entity);
+	public void delete(Long id);
 }

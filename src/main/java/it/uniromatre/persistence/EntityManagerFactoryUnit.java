@@ -16,8 +16,6 @@ public class EntityManagerFactoryUnit {
 	private String persistenceUnit;
 	
 	public EntityManagerFactoryUnit(){
-		//this.emf = Persistence.createEntityManagerFactory("esercitazione-jpa-unit");
-		//this.em = emf.createEntityManager();
 	}
 	
 	public EntityManagerFactory getEmf() {

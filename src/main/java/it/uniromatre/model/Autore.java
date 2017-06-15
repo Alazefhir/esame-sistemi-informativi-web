@@ -22,7 +22,7 @@ public class Autore {
 	private Long id;
 	@Column (nullable = false)
 	private String nome;
-	@OneToMany (mappedBy = "autore",cascade = {CascadeType.REMOVE,CascadeType.REFRESH})
+	@OneToMany (mappedBy = "autore",cascade = {CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST})
 	private List <Opera> opera;
 	
 	public Autore() {}
@@ -48,8 +48,8 @@ public class Autore {
 		this.opera = opera;
 	}
 	
-	public void setOpera (Opera opera){
-		if (this.opera != null)
+	public void setOpera (Opera opera){		
+		if (this.opera != null && ! this.opera.contains(opera))
 			this.opera.add(opera);
 		else {
 			this.opera = new ArrayList<Opera>();
