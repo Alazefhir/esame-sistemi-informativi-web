@@ -23,6 +23,7 @@ public class Autore {
 	private Long id;
 	@Column (nullable = false)
 	private String nome;
+
 	@Column (nullable = false)
 	private String cognome;
 	@Column (nullable = false)
@@ -31,6 +32,7 @@ public class Autore {
 	private Date dataNascita;
 	@Column (nullable = false)
 	private Date dataMorte;
+
 	@OneToMany (mappedBy = "autore",cascade = {CascadeType.REMOVE,CascadeType.REFRESH,CascadeType.PERSIST})
 	private List <Opera> opera;
 	
