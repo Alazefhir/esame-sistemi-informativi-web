@@ -4,22 +4,17 @@ import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
-import javax.persistence.EntityTransaction;
+import javax.persistence.PersistenceContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-
-
+import org.springframework.transaction.annotation.Transactional;
 import it.uniromatre.persistence.CrudRepositoryJPA;
-import it.uniromatre.persistence.EntityManagerFactoryUnit;
 
 @Service
+@Transactional
 public class BasicService<T> implements ServiceInterface<T> {
 	
-	@Autowired
-	private EntityManagerFactoryUnit emfu;
 	private EntityManager em;
-	private EntityTransaction tx;
 	@Autowired
 	private CrudRepositoryJPA <T> repository;
 	private Class<T> entityClass;
@@ -29,92 +24,60 @@ public class BasicService<T> implements ServiceInterface<T> {
 		this.entityClass = entityClass;
 	}
 	
+	//deprecato
 	@PostConstruct
-	public void init() {
-		
-		em = emfu.getEm();
-		this.tx = em.getTransaction();
-	}
+	public void init() {}
 	
 	@Override
+	@Transactional
 	public T inserisci(T entity){
 
-		this.tx.begin();
-		
 		repository.save(entity);
-		//em.persist(opera);
-		
-		this.tx.commit();
 		return entity;
 	}
 	
 	@Override
+	@Transactional
 	public List<T> getAll() {
-			
-		this.tx.begin();
-		
 		List<T> entities = repository.findAll();
-		
-		this.tx.commit();
-	
 		return entities;
 	}
 	
 	@Override
+	@Transactional
 	public List<T> getByAttribute(String attribute) {
-		
-		this.tx.begin();
-		
 		List<T> entities = repository.findAttribute(attribute);
-		
-		this.tx.commit();
-	
 		return entities;
 	}
 
 	@Override
-	public T getOne(Long identifier) {
-		
-		this.tx.begin();
-		
-		T entity = repository.findOne(identifier);
-		
-		this.tx.commit();
+	@Transactional
+	public T getOne(Long identifier) {	
+		T entity = repository.findOne(identifier);	
 		return entity;
 	}
 	
 	@Override
+	@Transactional
 	public void delete (T entity){
-
-		this.tx.begin();
 		
 		repository.delete(entity);
+	}
+	
+	@Override
+	@Transactional
+	public void delete (Long id){
 		
-		this.tx.commit();
-	}
-
-	public EntityManagerFactoryUnit getEmfu() {
-		return emfu;
-	}
-
-	public void setEmfu(EntityManagerFactoryUnit emfu) {
-		this.emfu = emfu;
+		repository.delete (id);
 	}
 
 	public EntityManager getEm() {
 		return em;
 	}
 
+	@PersistenceContext
 	public void setEm(EntityManager em) {
 		this.em = em;
-	}
-
-	public EntityTransaction getTx() {
-		return tx;
-	}
-
-	public void setTx(EntityTransaction tx) {
-		this.tx = tx;
 	}
 
 	public CrudRepositoryJPA<T> getRepository() {

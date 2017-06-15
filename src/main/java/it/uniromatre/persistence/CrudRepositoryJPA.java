@@ -1,21 +1,21 @@
 package it.uniromatre.persistence;
 
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.persistence.TypedQuery;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-@Service
 public class CrudRepositoryJPA<T> implements CrudRepository<T> {
 	
-	@Autowired
-	private EntityManagerFactoryUnit emfu;
+	private EntityManagerFactory emf;
 	private EntityManager em;
 	private Class<T> entityClass;
 	
@@ -24,40 +24,7 @@ public class CrudRepositoryJPA<T> implements CrudRepository<T> {
 		this.entityClass = entityClass;
 	}
 	
-	@PostConstruct
-	public void init(){
-		
-		this.em = this.emfu.getEm();
-	}
 	
-	public EntityManagerFactoryUnit getEmfu() {
-		return this.emfu;
-	}
-
-	public void setEmfu(EntityManagerFactoryUnit emfu) {
-		this.emfu = emfu;
-	}
-
-	public void setEntityClass(Class<T> entityClass) {
-		this.entityClass = entityClass;
-	}
-
-	protected void setEm(EntityManager em) {
-		this.em = em;
-	}
-	
-	protected EntityManager getEm() {
-		return this.em;
-	}
-	
-	protected Class<T> getEntityClass() {
-		return entityClass;
-	}
-
-	private String getEntityClassName() {
-		return this.entityClass.getSimpleName();
-	}
-
 
 	public T save(T entity) {
 		Method getIdMethod = null;
@@ -88,37 +55,102 @@ public class CrudRepositoryJPA<T> implements CrudRepository<T> {
 	}
 
 	@Override
+
 	public T findOne(Long id) {
 		return this.em.find(this.entityClass, id);
 	}
 
 	@Override
-	public List<T> findAll() {
-		Query query = this.em.createQuery("Select e From " + this.entityClass.getName() + " e");
-		return query.getResultList();
-	}
-	
-	public List<T> findAttribute (String attribute) {
-		Query query = this.em.createQuery
-				("Select e." + attribute + " From " + this.entityClass.getName() + " e ORDER BY e." + attribute );
-		return query.getResultList();
-		
-	}
 
-	@Override
-	public void delete(T entity) {
-		this.em.remove(entity);
+	public List<T> findAll() {
+				
+		TypedQuery<T> query =  this.em.createQuery ("Select e From " + this.entityClass.getName() + " e", this.entityClass);
+		
+		return query.getResultList();
 	}
 	
 	@Override
+
+	public List<T> findAttribute (String attribute) {
+		
+		TypedQuery<T> query =  this.em.createQuery
+				("Select e From " + this.entityClass.getName() + " e ORDER BY e." + attribute, this.entityClass);
+		
+		return query.getResultList();
+	}
+	
+	//questa implementazione presenta problemi con le entità "detached"
+	//mentre la implementazione tramite id non presenta problemi
+	//lascerò la vecchia implementazione commentata come memento
+	@Override
+
+	public void delete(T entity) {
+		
+		//this.em.remove(entity);
+		
+		Method getIdMethod = null;
+
+		try {
+			getIdMethod = this.entityClass.getMethod("getId");
+		}
+		catch(NoSuchMethodException | SecurityException e) {
+			//e.printStackTrace();
+		}
+
+		try {
+			
+			this.delete((Long)getIdMethod.invoke(entity));
+			
+		} catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			//e.printStackTrace();
+		}
+	}
+	
+	@Override
+
 	public void delete (Long id) {
 		this.em.remove(findOne(id));
 	}
 
 	@Override
+
 	public void deleteAll() {
 		Query query = this.em.createQuery("Delete e From " + this.entityClass.getName() + " e");
 		query.executeUpdate();
+	}
+	
+	//getters and setters
+	
+	//deprecato
+	@PostConstruct
+	public void init(){
+		
+		//this.em = this.emfu.getEm();
+	}
+	
+	public EntityManagerFactory getEmf() {
+		return this.emf;
+	}
+
+	public void setEmf(EntityManagerFactory emf) {
+		this.emf = emf;
+	}
+
+	public void setEntityClass(Class<T> entityClass) {
+		this.entityClass = entityClass;
+	}
+
+	@PersistenceContext
+	protected void setEm(EntityManager em) {
+		this.em = em;
+	}
+	
+	protected EntityManager getEm() {
+		return this.em;
+	}
+	
+	protected Class<T> getEntityClass() {
+		return entityClass;
 	}
 	
 }

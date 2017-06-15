@@ -4,12 +4,16 @@
 
 <beans xmlns = "http://www.springframework.org/schema/beans"
    xmlns:xsi = "http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:tx="http://www.springframework.org/schema/tx"
    xmlns:context = "http://www.springframework.org/schema/context"
    xsi:schemaLocation = "http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+   http://www.springframework.org/schema/tx
+   http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
    http://www.springframework.org/schema/context
    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
-
+   
+   <context:spring-configured />
    <context:annotation-config/>
    
    <!-- below you will find a collection of bean's properties -->
@@ -70,17 +74,44 @@
 	
 	<!-- bean configuration -->
 	
-	<bean id="entitymanager" class = "it.uniromatre.persistence.EntityManagerFactoryUnit" init-method= "init"
-		destroy-method="destroy" scope = "singleton" autowire = "byName">
-		
-		<property name="persistenceUnit" value = "esercitazione-jpa-unit"></property>
+	<!-- Scan for possible beans -->
+	
+	<context:component-scan base-package="it.uniromatre.persistence">
+        <context:include-filter type="annotation"
+            expression="org.springframework.stereotype.Repository" />
+    </context:component-scan>
+	
+	<!-- Entity Manager configuration -->
+
+	<bean
+        class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
+        id="entityManagerFactory">
+        <property name="packagesToScan" value="it.uniromatre.model" />
+ 		<property name="dataSource" ref="dataSource" />
+ 		<property name="jpaVendorAdapter" ref="jpaVendorAdapter"/>
+ 		<property name="persistenceUnitName" value="esercitazione-jpa-unit"/>
+		<property name="jpaProperties">
+    		<props>
+      		<prop key="hibernate.show_sql">true</prop>
+      		<prop key="hibernate.hbm2ddl.auto">create</prop>
+    		</props>
+  		</property>
+    </bean>
+	
+	<bean id="jpaVendorAdapter" class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter">
+  		<property name="showSql" value="true"/>
+  		<property name="generateDdl" value="true"/>
+  		<property name="databasePlatform" value="org.hibernate.dialect.PostgreSQLDialect"/>
 	</bean>
 	
-	<bean id = "operecrud" class = "it.uniromatre.persistence.OpereRepository" scope = "singleton" init-method = "init" ></bean>
-	
-	<bean id = "autoricrud" class = "it.uniromatre.persistence.AutoriRepository" scope = "singleton" init-method = "init" ></bean>
-	
-	<!-- <bean id = "service" class ="it.uniromatre.service.BasicService" abstract = "true"></bean> -->
+	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
+        id="transactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory" />
+    </bean>
+    
+    <tx:annotation-driven proxy-target-class="true"
+        transaction-manager="transactionManager" />
+		
 	
 	<bean id = "autoriservice" class = "it.uniromatre.service.AutoriService" scope = "singleton"
 		init-method= "init">
@@ -89,8 +120,6 @@
 	 <bean id = "opereservice" class = "it.uniromatre.service.OpereService" scope = "singleton" 
 		init-method= "init">
 	</bean>
-	
-	
 	
 	
 	<!-- database access configuration -->
@@ -114,4 +143,8 @@
                  <value>.html</value>
              </property>
         </bean>
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    	<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
 </beans>
