@@ -10,19 +10,19 @@
 	<div>
 		<form action="#" th:action="@{/autore}" th:object="${autore}"  method="post">
 			<input type="text" th:field="*{nome}" class="form-control"
-				placeholder="nome" />
+				placeholder="nome" value="#{autore.nome}"/>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" th:field="*{cognome}" class="form-control"
-				placeholder="cognome" />
+				placeholder="cognome" value="#{autore.cognome}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="text" th:field="*{nazionalità}" class="form-control"
-				placeholder="nazionalità" />
+				placeholder="nazionalità" value="#{autore.nazionalità}" />
 			<div style="clear: both; display: block; height: 10px;"></div>	
 			<input type="text" th:field="*{dataNascita}" class="form-control"
-				placeholder="dataNascia" />
+				placeholder="dataNascia" value="#{autore.dataNascita}" />
 				<div style="clear: both; display: block; height: 10px;"></div>	
 			<input type="text" th:field="*{dataMorte}" class="form-control"
-				placeholder="dataMorte" />
+				placeholder="dataMorte" value="#{autore.dataMorte}" />
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" th:action="@{/autore/save}" class="btn btn-success" value="Save"></input>
 		</form>

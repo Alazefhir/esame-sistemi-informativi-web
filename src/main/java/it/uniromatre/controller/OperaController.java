@@ -4,10 +4,12 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import it.uniromatre.model.Autore;
@@ -25,47 +27,32 @@ public class OperaController {
         return "FormOpera";
     }
 	
-	@GetMapping("/getAllOpere")
-	public ModelAndView getAll() {
-		ModelAndView mv = new ModelAndView("/opera");
-		mv.addObject("opere", operaService.getAll());
-		return mv;
-	}
-	
-	@GetMapping("/opera")
-	public ModelAndView add(String titolo, Integer anno, String tecnica, String dimensione, Autore Autore) {
-		Opera opera = new Opera (titolo,anno,tecnica,dimensione,Autore);
-		ModelAndView mv = new ModelAndView("/FormOpera");
-		mv.addObject("opera", opera);
-		return mv;
-	}
-	
-	@GetMapping("/opera")
-	public ModelAndView add(Opera opera) {
-		ModelAndView mv = new ModelAndView("/FormOpera");
-		mv.addObject("opera", opera);
-		return mv;
-	}
-	
-	@GetMapping("/opera/edit/{id}")
-	public ModelAndView edit(@PathVariable("id") Long id){
-		return add(operaService.getOne(id));
-	}
-	
-	@GetMapping("/opera/delete/{id}")
-	public ModelAndView delete(@PathVariable("id") Long id) {
-		//operaService.delete(id);
-		return getAll();
-	}
-	
-	@PostMapping("/opera/save")
-	public ModelAndView save(@Valid Opera opera, BindingResult bindingResult) {
+	@PostMapping("/opera")
+	public String addNewOpera(@Valid Opera opera, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) {
-			return add(opera);
+			return "FormOpera";
 		}
 		operaService.inserisci(opera);
-		return getAll();
+		model.addAttribute("opera", operaService.getAll());
+		return "opera";
 	}
 	
+	@GetMapping("/getAllOpere")
+	public String getAllAutori(Model model) {
+		model.addAttribute("opere", operaService.getAll());
+		return "opere";
+	}
 	
+	@RequestMapping("/opera/delete/{id}")
+	public String deleteAutore(@PathVariable("id") Long id) {
+		operaService.delete(id);
+		return "redirect:/opere";
+	}
+	
+	@RequestMapping("/autore/edit/{id}")
+	public String editAutore(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("opera", operaService.getOne(id));
+		model.addAttribute("opere", operaService.getAll());
+		return "opera";
+	}
 }

@@ -127,9 +127,9 @@
 	<bean id = "dataSource" 
    		class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
   		<property name = "driverClassName" value = "org.postgresql.Driver"/>
-   		<property name = "url" value = "jdbc:postgresql://localhost/museo"/>
+   		<property name = "url" value = "jdbc:postgresql://localhost:5433/museo"/>
    		<property name = "username" value = "postgres"/>
-  		<property name = "password" value = "postgres"/>
+  		<property name = "password" value = "losangeles23"/>
 	</bean>
 	
 	<!-- ViewResolver -->
@@ -137,7 +137,7 @@
 	<bean id="viewResolver"
       class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
               <property name="prefix">
-                  <value>/templates/</value>
+                  <value>/</value>
               </property>
               <property name="suffix">
                  <value>.html</value>
