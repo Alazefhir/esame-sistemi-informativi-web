@@ -8,23 +8,18 @@
 <body>
 	<h1>New Opera</h1>
 	<div>
-		<form action="#" th:action="@{/opera}" th:object="${autore}"   method="post">
-			<input type="text" th:field="*{titolo}" class="form-control"
-				placeholder="nome" />
+		<form action="#" th:action="@{/opera}" th:object="${opera}"   method="post">
+			<input type="text" th:field="*{titolo}" class="form-control" placeholder = "titolo" />
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{anno}" class="form-control"
-				placeholder="cognome" />
+			<input type="text" th:field="*{anno}" class="form-control" placeholder = "anno"/>
 			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{tecnica}" class="form-control"
-				placeholder="nazionalità" />
+			<input type="text" th:field="*{tecnica}" class="form-control" placeholder = "tecnica"/>
 			<div style="clear: both; display: block; height: 10px;"></div>	
-			<input type="text" th:field="*{dimensione}" class="form-control"
-				placeholder="dataNascia" />
+			<input type="text" th:field="*{dimensione}" class="form-control" placeholder = "dimensione"/>
 				<div style="clear: both; display: block; height: 10px;"></div>	
-			<input type="text" th:field="*{autore}" class="form-control"
-				placeholder="dataMorte" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" th:action="@{/opera/save}" class="btn btn-success" value="Save"></input>
+			<!--  <input type="text" th:field="*{autore}" class="form-control"/>
+			<div style="clear: both; display: block; height: 10px;"></div>-->
+			<input type="submit" th:action="@{/opera}" class="btn btn-success"></input>
 		</form>
 	</div>
 </body>

@@ -5,8 +5,8 @@
 <title>Layout</title>
 </head>
 <body>
-	<h1>Lista Opere</h1>
-	<table>
+	<h1>Lista Opera</h1>
+		<table>
 		<tr>
 			<th>Id</th>
 			<th>Titolo</th>
@@ -22,15 +22,7 @@
 			<td th:text="${opera.tecnica}"></td>
 			<td th:text="${opera.dimensione}"></td>
 			<td th:text="${opera.autore}"></td>
-			<td><a th:href="@{/opera/edit/{id}(id=${opera.id})}">Modifica</a></td>
-			<td><a th:href="@{/autore/delete/{id}(id=${opera.id})}">Cancella</a></td>
 		</tr>
 		</table>
-		<div>
-			<a class="btn btn-sm btn-success" th:href="@{/autore}">Aggiungi</a>
-		</div>
-		<p>
-			<a href="prelayout.html" th:href="@{/prelayout}">Return to Layout</a>
-		</p>
 </body>
 </html>

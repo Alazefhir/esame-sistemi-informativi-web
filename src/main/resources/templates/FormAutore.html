@@ -8,23 +8,23 @@
 <body>
 	<h1>New Autore</h1>
 	<div>
-		<form action="#" th:action="@{/autore}" th:object="${autore}"  method="post">
-			<input type="text" th:field="*{nome}" class="form-control"
-				placeholder="nome" value="#{autore.nome}"/>
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{cognome}" class="form-control"
-				placeholder="cognome" value="#{autore.cognome}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{nazionalità}" class="form-control"
-				placeholder="nazionalità" value="#{autore.nazionalità}" />
-			<div style="clear: both; display: block; height: 10px;"></div>	
+		<form action="#" th:action="@{/autore}" th:object="${autore}" method = "post">
+			<input type="text" th:field="*{nome}" class="form-control" 
+			placeholder="nome" value="#{autore.nome}"/>
+				<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{cognome}" class="form-control" 
+			placeholder="cognome" value="#{autore.cognome}" />
+				<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="text" th:field="*{nazionalita}" class="form-control"
+			placeholder="nazionalita" value="#{autore.nazionalita}" />
+				<div style="clear: both; display: block; height: 10px;"></div>	
 			<input type="text" th:field="*{dataNascita}" class="form-control"
-				placeholder="dataNascia" value="#{autore.dataNascita}" />
+			placeholder="dataNascia" value="#{autore.dataNascita}" />
 				<div style="clear: both; display: block; height: 10px;"></div>	
 			<input type="text" th:field="*{dataMorte}" class="form-control"
-				placeholder="dataMorte" value="#{autore.dataMorte}" />
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" th:action="@{/autore/save}" class="btn btn-success" value="Save"></input>
+			placeholder="dataMorte" value="#{autore.dataMorte}" />
+				<div style="clear: both; display: block; height: 10px;"></div>
+			<input type="submit" th:action="@{/autore}" class="btn btn-success" ></input>
 		</form>
 	</div>
 </body>

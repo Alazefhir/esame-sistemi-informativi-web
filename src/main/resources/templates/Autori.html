@@ -18,7 +18,7 @@
 			<td th:text="${autore.id}"></td>
 			<td th:text="${autore.nome}"></td>
 			<td th:text="${autore.cognome}"></td>
-			<td th:text="${autore.nazionalità}"></td>
+			<td th:text="${autore.nazionalita}"></td>
 			<td th:text="${#dates.format(autore.dataNascita, 'dd/MM/yyyy')}"></td>
 			<td th:text="${#dates.format(autore.dataMorte, 'dd/MM/yyyy')}"></td>
 			<td><a th:href="@{/autore/edit/{id}(id=${autore.id})}">Modifica</a></td>
@@ -26,7 +26,7 @@
 		</tr>
 		</table>
 		<div>
-			<a class="btn btn-sm btn-success" th:href="@{/autore/add}">Aggiungi</a>
+			<a class="btn btn-sm btn-success" th:href="@{/autore}">Aggiungi</a>
 		</div>
 		<p>
 			<a href="prelayout.html" th:href="@{/prelayout}">Return back</a>

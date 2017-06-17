@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -29,33 +30,33 @@ public class AutoreController {
 	}
 	
 	@PostMapping("/autore")
-	public String addNewAutore(@Valid Autore autore, BindingResult bindingResult,Model model) {
+	public String addNewAutore(@Valid @ModelAttribute Autore autore, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) {
 			return "FormAutore";
 		}
 		autService.inserisci(autore);
 		model.addAttribute("autori", autService.getAll());
-		return "autori";
+		return "Autori";
 	}
 	
 	@GetMapping("/getAllAutori")
 	public String getAllAutori(Model model) {
 		model.addAttribute("autori", autService.getAll());
-		return "autori";
+		return "Autori";
 	}
 	
 	@RequestMapping("/autore/delete/{id}")
 	public String deleteAutore(@PathVariable("id") Long id, Model model) {
 		autService.delete(id);
 		model.addAttribute("autori", autService.getAll());
-		return "redirect:/autori";
+		return "redirect:/Autori";
 	}
 	
 	@RequestMapping("/autore/edit/{id}")
 	public String editAutore(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("autore", autService.getOne(id));
 		model.addAttribute("autori", autService.getAll());
-		return "autore";
+		return "Autori";
 	}
 	
 	

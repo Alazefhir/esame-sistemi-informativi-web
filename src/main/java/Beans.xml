@@ -107,25 +107,11 @@
 	<bean class="org.springframework.orm.jpa.JpaTransactionManager"
         id="transactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory" />
+        <property name="dataSource" ref="dataSource"/>
     </bean>
     
     <tx:annotation-driven proxy-target-class="true"
         transaction-manager="transactionManager" />
-		
-	<!--
-	<bean id = "autoriservice" class = "it.uniromatre.service.AutoriService" scope = "singleton"
-		init-method= "init">
-	</bean>	
-	 
-	 <bean id = "opereservice" class = "it.uniromatre.service.OpereService" scope = "singleton" 
-		init-method= "init">
-	</bean>
-	
-	 <bean id = "operecrud" class = "it.uniromatre.service.OpereRepository" scope = "singleton" >
-	</bean>
-	
-	<bean id = "autoricrud" class = "it.uniromatre.service.AutoriRepository" scope = "singleton" >
-	</bean> -->
 	
 	
 	<!-- database access configuration -->
@@ -143,15 +129,15 @@
 	<bean id="viewResolver"
       class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
               <property name="prefix">
-                  <value>/templates/</value>
+                  <value>/templates</value>
               </property>
               <property name="suffix">
                  <value>.html</value>
              </property>
         </bean>
 
-	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+	<!-- <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
     	<property name="dataSource" ref="dataSource"/>
-	</bean>
+	</bean>  -->
 	
 </beans>

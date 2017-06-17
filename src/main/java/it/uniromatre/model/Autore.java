@@ -27,7 +27,7 @@ public class Autore {
 	@Column (nullable = false)
 	private String cognome;
 	@Column (nullable = false)
-	private String nazionalità;
+	private String nazionalita;
 	@Column (nullable = false)
 	private Date dataNascita;
 	@Column (nullable = false)
@@ -38,10 +38,10 @@ public class Autore {
 	
 	public Autore() {}
 	
-	public Autore(String nome, String cognome, String nazionalità, Date dataNascita, Date dataMorte){
+	public Autore(String nome, String cognome, String nazionalita, Date dataNascita, Date dataMorte){
 		this.nome = nome;
 		this.cognome = cognome;
-		this.nazionalità = nazionalità;
+		this.nazionalita = nazionalita;
 		this.dataNascita = dataNascita;
 		this.dataMorte = dataMorte;
 	}
@@ -67,12 +67,12 @@ public class Autore {
 		this.cognome = cognome;
 	}
 
-	public String getNazionalità() {
-		return nazionalità;
+	public String getNazionalita() {
+		return nazionalita;
 	}
 
-	public void setNazionalità(String nazionalità) {
-		this.nazionalità = nazionalità;
+	public void setNazionalita(String nazionalita) {
+		this.nazionalita = nazionalita;
 	}
 
 	public Date getDataNascita() {
