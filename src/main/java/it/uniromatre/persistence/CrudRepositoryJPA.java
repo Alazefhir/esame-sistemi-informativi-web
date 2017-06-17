@@ -12,12 +12,19 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
+
 
 public class CrudRepositoryJPA<T> implements CrudRepository<T> {
 	
 	private EntityManagerFactory emf;
 	private EntityManager em;
+	@Autowired(required = false)
 	private Class<T> entityClass;
+	
 	
 	public CrudRepositoryJPA(Class<T> entityClass) {
 		

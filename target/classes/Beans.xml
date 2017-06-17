@@ -112,7 +112,7 @@
     <tx:annotation-driven proxy-target-class="true"
         transaction-manager="transactionManager" />
 		
-	
+	<!--
 	<bean id = "autoriservice" class = "it.uniromatre.service.AutoriService" scope = "singleton"
 		init-method= "init">
 	</bean>	
@@ -121,15 +121,21 @@
 		init-method= "init">
 	</bean>
 	
+	 <bean id = "operecrud" class = "it.uniromatre.service.OpereRepository" scope = "singleton" >
+	</bean>
+	
+	<bean id = "autoricrud" class = "it.uniromatre.service.AutoriRepository" scope = "singleton" >
+	</bean> -->
+	
 	
 	<!-- database access configuration -->
 	
 	<bean id = "dataSource" 
    		class = "org.springframework.jdbc.datasource.DriverManagerDataSource">
   		<property name = "driverClassName" value = "org.postgresql.Driver"/>
-   		<property name = "url" value = "jdbc:postgresql://localhost:5433/museo"/>
+   		<property name = "url" value = "jdbc:postgresql://localhost/museo"/>
    		<property name = "username" value = "postgres"/>
-  		<property name = "password" value = "losangeles23"/>
+  		<property name = "password" value = "postgres"/>
 	</bean>
 	
 	<!-- ViewResolver -->
@@ -137,7 +143,7 @@
 	<bean id="viewResolver"
       class="org.springframework.web.servlet.view.InternalResourceViewResolver" >
               <property name="prefix">
-                  <value>/</value>
+                  <value>/templates/</value>
               </property>
               <property name="suffix">
                  <value>.html</value>

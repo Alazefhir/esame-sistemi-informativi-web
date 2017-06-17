@@ -1,14 +1,17 @@
 package it.uniromatre.service;
 
 import it.uniromatre.model.Opera;
+import it.uniromatre.persistence.CrudRepositoryJPA;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 @Service
-public class OpereService extends BasicService<Opera> {
-
+public class OpereService<T> extends BasicService<Opera> {
+	
 	@Autowired
 	public OpereService () {
-		super (Opera.class);
+		super ();
 	}
 }

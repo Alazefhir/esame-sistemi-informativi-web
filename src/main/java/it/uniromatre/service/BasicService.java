@@ -5,23 +5,25 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import it.uniromatre.persistence.CrudRepositoryJPA;
 
-@Service
-@Transactional
+import it.uniromatre.persistence.CrudRepositoryJPA;
+import it.uniromatre.persistence.OpereRepository;
+
+
 public class BasicService<T> implements ServiceInterface<T> {
 	
 	private EntityManager em;
 	@Autowired
 	private CrudRepositoryJPA <T> repository;
-	private Class<T> entityClass;
+	
+	
 
-	public BasicService (Class<T> entityClass) {
-		
-		this.entityClass = entityClass;
+	public BasicService () {
+	
 	}
 	
 	//deprecato
@@ -86,13 +88,5 @@ public class BasicService<T> implements ServiceInterface<T> {
 
 	public void setRepository(CrudRepositoryJPA<T> repository) {
 		this.repository = repository;
-	}
-
-	public Class<T> getEntityClass() {
-		return entityClass;
-	}
-
-	public void setEntityClass(Class<T> entityClass) {
-		this.entityClass = entityClass;
 	}
 }

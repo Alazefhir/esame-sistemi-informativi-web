@@ -49,10 +49,4 @@ public class OperaController {
 		return "redirect:/opere";
 	}
 	
-	@RequestMapping("/autore/edit/{id}")
-	public String editAutore(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("opera", operaService.getOne(id));
-		model.addAttribute("opere", operaService.getAll());
-		return "opera";
-	}
 }
