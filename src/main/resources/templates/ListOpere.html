@@ -1,8 +1,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8"></meta>
-<title>Layout</title>
+	<meta charset="UTF-8"></meta>
+	<title>Visualizza opere</title>
+	<meta name = "viewport" content = "width=device-width, initial-scale=1"></meta>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 </head>
 <body>
 	<h1>Lista Opera</h1>
@@ -16,13 +18,16 @@
 			<th>autore</th>
 		</tr>
 		<tr th:each="opera: ${opere}">
-			<td th:text="${opera.id}"></td>
-			<td th:text="${opera.titolo}"></td>
-			<td th:text="${opera.anno}"></td>
-			<td th:text="${opera.tecnica}"></td>
-			<td th:text="${opera.dimensione}"></td>
-			<td th:text="${opera.autore}"></td>
+			<td th:text="${opera.getId()}"></td>
+			<td th:text="${opera.getTitolo()}"></td>
+			<td th:text="${opera.getAnno()}"></td>
+			<td th:text="${opera.getTecnica()}"></td>
+			<td th:text="${opera.getDimensione()}"></td>
+			<td th:text="${opera.getAutore()}"></td>
 		</tr>
 		</table>
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

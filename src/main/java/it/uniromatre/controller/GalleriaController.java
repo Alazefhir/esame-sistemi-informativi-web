@@ -24,6 +24,11 @@ public class GalleriaController {
 	public String index(){
 		return "index";
 	}
+	
+	@RequestMapping("/adminpage")
+	public String mainPage(){
+		return "AdminPage";
+	}
 
 	@RequestMapping ("/autori")
 	public String showListAutori(@ModelAttribute Autore autore, Model model) {
@@ -33,7 +38,7 @@ public class GalleriaController {
 	
 	@RequestMapping ("/opere")
 	public String showListAutori(@ModelAttribute Opera opera, Model model) {
-		model.addAttribute("opere",autService.getAll());
+		model.addAttribute("opere",opService.getAll());
 		return "ListOpere";
 	}
 }

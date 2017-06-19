@@ -22,17 +22,14 @@ public class CrudRepositoryJPA<T> implements CrudRepository<T> {
 	
 	private EntityManagerFactory emf;
 	private EntityManager em;
-	@Autowired(required = false)
-	private Class<T> entityClass;
+	protected Class<T> entityClass;
 	
-	
+	@Autowired
 	public CrudRepositoryJPA(Class<T> entityClass) {
 		
 		this.entityClass = entityClass;
 	}
 	
-	
-
 	public T save(T entity) {
 		Method getIdMethod = null;
 		
@@ -116,6 +113,7 @@ public class CrudRepositoryJPA<T> implements CrudRepository<T> {
 	@Override
 
 	public void delete (Long id) {
+		//this.delete(findOne(id));
 		this.em.remove(findOne(id));
 	}
 
@@ -142,7 +140,7 @@ public class CrudRepositoryJPA<T> implements CrudRepository<T> {
 	public void setEmf(EntityManagerFactory emf) {
 		this.emf = emf;
 	}
-
+	
 	public void setEntityClass(Class<T> entityClass) {
 		this.entityClass = entityClass;
 	}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>admin page</title>
+	<meta charset="UTF-8"></meta>
+	<meta name = "viewport" content = "width=device-width, initial-scale=1"></meta>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	
+	
+</head>
+<body>
+	
+	<nav class="navbar navbar-inverse">
+ 	 <div class="container-fluid">
+   	 <div class="navbar-header">
+     	 <a class="navbar-brand" href="#">Pagina admin</a>
+   		 </div>
+			<ul class="nav navbar-nav">
+				<li class="active"><a href="#">Home</a></li> 
+			</ul>
+		</div>
+	</nav>
+
+	<div class ="container">
+		<h3>Azioni disponibili:</h3>
+		<div class = "dropdown">
+			<button class = "btn btn-primary dropdown-toggle" type = "button" data-toggle= "dropdown">Azioni disponibili
+			<span class = "caret"></span></button>
+			<ul class = "dropdown-menu">
+				<li><a href="/getAllOpere">visualizza opere</a></li>
+				<li><a href="#">cerca opera</a></li>
+				<li><a href="/opera">inserisci opera</a></li>
+				<li><a href="/getAllAutori">visualizza autori</a></li>
+				<li><a href="#">cerca autore</a></li>
+				<li><a href="/autore">inserisci autore</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> 
+
+</body>
+</html>

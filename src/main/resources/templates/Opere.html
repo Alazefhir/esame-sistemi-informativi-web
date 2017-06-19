@@ -1,10 +1,16 @@
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="http://www.thymeleaf.org">
 <head>
-<meta charset="UTF-8"></meta>
-<title>Layout</title>
+	<meta charset="UTF-8"></meta>
+	<title>Layout</title>
+	<meta name = "viewport" content = "width=device-width, initial-scale=1"></meta>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
 </head>
 <body>
+	
+	<div class ="container">
+	<div class = "dropdown">
 	<h1>Lista Opere</h1>
 	<table>
 		<tr>
@@ -22,15 +28,38 @@
 			<td th:text="${opera.tecnica}"></td>
 			<td th:text="${opera.dimensione}"></td>
 			<td th:text="${opera.autore}"></td>
-			<td><a th:href="@{/opera/edit/{id}(id=${opera.id})}">Modifica</a></td>
-			<td><a th:href="@{/autore/delete/{id}(id=${opera.id})}">Cancella</a></td>
-		</tr>
+			<td><a th:href="@{'/opera/edit/' + ${opera.id} }">Modifica</a></td>
+			<td><a th:href="@{'/opera/delete/' + ${opera.id} }">Cancella</a></td>
+			
+			</tr>
+			
+			<tr><td>robba</td></tr>
+			<tr th:each="autore: ${autori}">
+				<td><h4>robba</h4></td>
+				<td><button class = "btn btn-primary dropdown-toggle" type = "button" 
+					data-toggle= "dropdown">Assegna autore
+					<span class = "caret"></span></button>
+				</td>
+				<td>
+				<form action="#" th:action="#" th:object = "autori" method="post">
+						<ul class = "dropdown-menu">
+						<li><a th:href= "@{'/opera/assign/' + ${autore} + ${opera}" id= "${autore.id}">autore</a>
+						</li>
+						</ul>
+				</form>
+				</td>
+			</tr>
 		</table>
+		</div>
+		</div>
 		<div>
-			<a class="btn btn-sm btn-success" th:href="@{/autore}">Aggiungi</a>
+			<a class="btn btn-sm btn-success" th:href="@{/opera}">Aggiungi opera</a>
 		</div>
 		<p>
-			<a href="prelayout.html" th:href="@{/prelayout}">Return to Layout</a>
+			<a th:href="@{/adminpage}">Return to main page</a>
 		</p>
+		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

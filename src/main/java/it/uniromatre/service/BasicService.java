@@ -19,16 +19,17 @@ public class BasicService<T> implements ServiceInterface<T> {
 	private EntityManager em;
 	@Autowired
 	private CrudRepositoryJPA <T> repository;
+	protected Class<T> entityClass; 
 	
-	
-
-	public BasicService () {
-	
+	@Autowired
+	public BasicService (Class<T> entityClass) {
+		this.entityClass = entityClass;
 	}
 	
 	//deprecato
 	@PostConstruct
-	public void init() {}
+	public void init() {
+	}
 	
 	@Override
 	@Transactional
@@ -89,4 +90,13 @@ public class BasicService<T> implements ServiceInterface<T> {
 	public void setRepository(CrudRepositoryJPA<T> repository) {
 		this.repository = repository;
 	}
+
+	public Class<T> getEntityClass() {
+		return entityClass;
+	}
+
+	public void setEntityClass(Class<T> entityClass) {
+		this.entityClass = entityClass;
+	}
+	
 }

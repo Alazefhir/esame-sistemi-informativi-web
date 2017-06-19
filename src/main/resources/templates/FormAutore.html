@@ -9,23 +9,34 @@
 	<h1>New Autore</h1>
 	<div>
 		<form action="#" th:action="@{/autore}" th:object="${autore}" method = "post">
-			<input type="text" th:field="*{nome}" class="form-control" 
-			placeholder="nome" value="#{autore.nome}"/>
+		
+			<input type="hidden" th:field="*{id}" class="form-control" name = "id"/>
+		
+			<input type="text" th:field="*{nome}" class="form-control" name= "nome" 
+				placeholder="nome" value="#{autore.nome}"/>
 				<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{cognome}" class="form-control" 
-			placeholder="cognome" value="#{autore.cognome}" />
+				
+			<input type="text" th:field="*{cognome}" class="form-control" name= "cognome"
+				placeholder="cognome" value="#{autore.cognome}" />
 				<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="text" th:field="*{nazionalita}" class="form-control"
-			placeholder="nazionalita" value="#{autore.nazionalita}" />
+				
+			<input type="text" th:field="*{nazionalita}" class="form-control" name= "nazionalita"
+				placeholder="nazionalita" value="#{autore.nazionalita}" />
 				<div style="clear: both; display: block; height: 10px;"></div>	
-			<input type="text" th:field="*{dataNascita}" class="form-control"
-			placeholder="dataNascia" value="#{autore.dataNascita}" />
+				
+			<input type="text" th:field="*{dataNascita}" class="form-control" name= "dataNascita"
+				placeholder="dataNascia" value="#{autore.dataNascita}" />
 				<div style="clear: both; display: block; height: 10px;"></div>	
-			<input type="text" th:field="*{dataMorte}" class="form-control"
-			placeholder="dataMorte" value="#{autore.dataMorte}" />
+				
+			<input type="text" th:field="*{dataMorte}" class="form-control" name= "dataMorte"
+				placeholder="dataMorte" value="#{autore.dataMorte}" />
 				<div style="clear: both; display: block; height: 10px;"></div>
+				
 			<input type="submit" th:action="@{/autore}" class="btn btn-success" ></input>
 		</form>
 	</div>
+	<p>
+		<a th:href="@{/adminpage}">Pagina precedente</a>
+	</p>
 </body>
 </html>

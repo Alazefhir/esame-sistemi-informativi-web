@@ -28,7 +28,7 @@ public class Opera {
 	@Column (nullable=false)
 	private String dimensione;
 	
-	@ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE,CascadeType.REFRESH})
+	@ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	private Autore autore;
 	
 	public Opera (){}
@@ -103,8 +103,8 @@ public class Opera {
 	
 	@PreRemove
 	public void preremove(){
-		
-		this.autore.getOpera().remove(this);
+		if (this.autore!=null)
+			this.autore.getOpera().remove(this);
 		
 	}
 }

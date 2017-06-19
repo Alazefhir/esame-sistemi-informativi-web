@@ -29,7 +29,7 @@ public class OperaController {
     }
 	
 	@PostMapping("/opera")
-	public String addNewOpera(@Valid @ModelAttribute Opera opera, BindingResult bindingResult,Model model) {
+	public String addNewOpera(@Valid Opera opera, BindingResult bindingResult,Model model) {
 		if(bindingResult.hasErrors()) {
 			return "FormOpera";
 		}
@@ -39,15 +39,31 @@ public class OperaController {
 	}
 	
 	@GetMapping("/getAllOpere")
-	public String getAllAutori(Model model) {
+	public String getAllOpere(Model model) {
 		model.addAttribute("opere", operaService.getAll());
 		return "Opere";
 	}
 	
 	@RequestMapping("/opera/delete/{id}")
-	public String deleteAutore(@PathVariable("id") Long id) {
+	public String deleteOpera(@PathVariable("id") Long id, Model model) {
 		operaService.delete(id);
-		return "redirect:/Opere";
+		model.addAttribute("opere", operaService.getAll());
+		return "Opere";
 	}
 	
+	@RequestMapping("/opera/edit/{id}")
+	public String editOpera(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("opera", operaService.getOne(id));
+		model.addAttribute("opere", operaService.getAll());
+		return "FormOpera";
+	}
+	
+	@RequestMapping("/opera/assign/{autore}{opera}")
+	public String assegnaAutore(@PathVariable("autore") @ModelAttribute Autore autore,
+			@PathVariable("opera") @ModelAttribute Opera opera,Model model){
+		
+		opera.setAutore(autore);
+		model.addAttribute("opere", operaService.getAll());
+		return "ListOpere";
+	}
 }

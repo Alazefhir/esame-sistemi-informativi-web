@@ -49,7 +49,7 @@ public class AutoreController {
 	public String deleteAutore(@PathVariable("id") Long id, Model model) {
 		autService.delete(id);
 		model.addAttribute("autori", autService.getAll());
-		return "redirect:/Autori";
+		return "Autori";
 	}
 	
 	@RequestMapping("/autore/edit/{id}")
