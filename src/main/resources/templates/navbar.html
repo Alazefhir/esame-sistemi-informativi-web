@@ -1,20 +1,50 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="ISO-8859-1"></meta>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
 </head>
 <body>
 
 	<nav class="navbar navbar-inverse">
  	 <div class="container-fluid">
    	 <div class="navbar-header">
-     	 <a class="navbar-brand" href="#">Pagina admin</a>
+     	 <a class="navbar-brand" href="#">Galleria D'arte</a>
    		 </div>
 			<ul class="nav navbar-nav">
 				<li class="active"><a href="/">Home</a></li> 
 			</ul>
+			
+			<div th:if="${#httpServletRequest.isUserInRole('ADMIN')} == true">
+				<div w3-include-html="/sidebar"></div>
+			</div>
+			
+			<ul class="nav navbar-nav navbar-right">
+			
+			
+			
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" 
+						aria-expanded="false">Visita Museo <span class="caret"></span></a>
+	
+				<ul class="dropdown-menu">
+					<li th:if="${#httpServletRequest.isUserInRole('ADMIN')} == true">
+						<form th:action="@{/logout}" method="post">
+            				<input class="btn btn-hero btn-lg btn-block" type="submit" value="Sign Out"></input>
+        				</form>
+					</li>
+					<li th:if="${#httpServletRequest.isUserInRole('ADMIN')} == false">
+						<a class="btn btn-hero btn-lg btn-block" href="/adminpage">Login</a>
+					</li>
+					<li><a href="/opere">Lista opere</a></li>
+					<li><a href="/autori">Lista autori</a></li>
+				</ul>
+				</li>
+			</ul>
 		</div>
 	</nav>
-
+<script>w3.includeHTML();</script>
 </body>
 </html>

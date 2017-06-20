@@ -72,8 +72,12 @@ public class OperaController {
 		
 		Opera opera = (Opera) operaService.getOne(idopera);
 		Autore autore = (Autore) autService.getOne(idautore);
-
+		
+		//protegge contro inserzioni inaspettate
+		if(opera != null && autore != null)
 			opera.setAutore(autore);
+		else
+			System.out.println("opera o autore inesistenti nel model.");
 		
 		model.addAttribute("opere", operaService.getAll());
 		model.addAttribute("autori", autService.getAll());
@@ -81,7 +85,14 @@ public class OperaController {
 	}
 	
 	@RequestMapping("/opera/find")
-	public void FindOperaByAttribute(String titolo) {
-		operaService.getByAttribute(titolo);
+	public String FindOperaByAttribute(String titolo, Model model) {
+		model.addAttribute("opere", operaService.getByAttribute(titolo));
+		return "opera";
+	}
+	
+	@RequestMapping("/opere/find")
+	public String FindOperaByAttribute2(String titolo, Model model) {
+		model.addAttribute("opere", operaService.getByAttribute(titolo));
+		return "opere";
 	}
 }

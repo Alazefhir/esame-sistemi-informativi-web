@@ -42,9 +42,19 @@ public class GalleriaController {
 		return "ListOpere";
 	}
 	
-	//mapping degli import, una request per ogni import?
+	//mapping degli import, una request per ogni import.
 	@RequestMapping ("/nav")
-	public String importHtml(){
-		return "navbar";
+	public String importNavigationBar(){
+		return "Navbar";
+	}
+	
+	@RequestMapping ("/sidebar")
+	public String importAdminSideBar(){
+		return "Sidebar";
+	}
+	
+	@RequestMapping ("/footer")
+	public String importFooter(){
+		return "Footer";
 	}
 }
