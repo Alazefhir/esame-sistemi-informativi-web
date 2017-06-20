@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Autore</title>
+<meta charset="UTF-8"></meta>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+</head>
+<body>
+
+	<div w3-include-html="/nav"></div>
+
+	<div class="col-md-12">
+		<h1 class="text-center">Nuova Autore</h1>
+		<br />
+	</div>
+	<div class="container">
+		<div class="panel panel-default">
+			<div class="panel-body">
+				<form role="form" action="#" th:action="@{/autore}"
+					th:object="${autore}" method="post">
+					<div class="form-group">
+						<input type="hidden" th:field="*{id}" class="form-control"
+							name="id" />
+					</div>
+					<div class="form-group">
+						<input type="text" th:field="*{nome}" class="form-control"
+							name="nome" placeholder="nome" value="#{autore.nome}" />
+						<!-- <span th:if="${#fields.hasErrors('nome')}" th:text="#{label.mandatory}">Error</span> -->
+						<div>
+							<div class="text">*</div>
+						</div>
+					</div>
+					<!-- <div style="clear: both; display: block; height: 10px;"></div> -->
+					<div class="form-group">
+						<input type="text" th:field="*{cognome}" class="form-control"
+							name="cognome" placeholder="cognome" value="#{autore.cognome}" />
+						<!-- <span th:if="${#fields.hasErrors('cognome')}" th:text="#{label.mandatory}">Error</span> -->
+						<div class="required-icon">
+							<div class="text">*</div>
+						</div>
+					</div>
+					<!-- <div style="clear: both; display: block; height: 10px;"></div> -->
+					<div class="form-group">
+						<input type="text" th:field="*{nazionalita}" class="form-control"
+							name="nazionalita" placeholder="nazionalita"
+							value="#{autore.nazionalita}" />
+						<!-- <span th:if="${#fields.hasErrors('nazionalita')}" th:text="#{label.mandatory}">Error</span> -->
+						<div class="required-icon">
+							<div class="text">*</div>
+						</div>
+					</div>
+					<!-- <div style="clear: both; display: block; height: 10px;"></div> -->
+					<div class="form-group">
+						<input type="text" th:field="*{dataNascita}" class="form-control"
+							name="dataNascita" placeholder="dataNascita"
+							value="#{autore.dataNascita}" />
+						<!-- <span th:if="${#fields.hasErrors('dataNascita')}" th:text="#{label.mandatory}">Error</span> -->
+						<div class="required-icon">
+							<div class="text">*</div>
+						</div>
+					</div>
+					<!-- <div style="clear: both; display: block; height: 10px;"></div> -->
+					<div class="form-group">
+						<input type="text" th:field="*{dataMorte}" class="form-control"
+							name="dataMorte" placeholder="dataMorte"
+							value="#{autore.dataMorte}" />
+						<!--  <span th:if="${#fields.hasErrors('dataMorte')}" th:text="#{label.mandatory}">Error</span> -->
+						<div class="required-icon">
+							<div class="text">*</div>
+						</div>
+					</div>
+
+					<!-- <div style="clear: both; display: block; height: 10px;"></div> -->
+
+					<input type="submit" th:action="@{/autore}"
+						class="btn btn-success btn-lg"></input>
+
+				</form>
+				<p>
+					<a th:href="@{/adminpage}">Pagina precedente</a>
+				</p>
+			</div>
+		</div>
+	</div>
+	<script>
+			w3.includeHTML();
+		</script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

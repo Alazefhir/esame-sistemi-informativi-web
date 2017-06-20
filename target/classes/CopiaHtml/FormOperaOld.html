@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Opera</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name = "viewport" content = "width=device-width, initial-scale=1"></meta>
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+	<h1>New Opera</h1>
+	<div>
+		<form action="#" th:action="@{/opera}" th:object="${opera}"   method="post">
+		
+			<input type="hidden" th:field="*{id}" class="form-control" name = "id"/>
+		
+			<input type="text" th:field="*{titolo}" class="form-control" name = "titolo" placeholder = "titolo" />
+				<div style="clear: both; display: block; height: 10px;"></div>
+				
+			<input type="text" th:field="*{anno}" class="form-control" name = "anno" placeholder = "anno"/>
+				<div style="clear: both; display: block; height: 10px;"></div>
+				
+			<input type="text" th:field="*{tecnica}" class="form-control" name = "tecnica" placeholder = "tecnica"/>
+				<div style="clear: both; display: block; height: 10px;"></div>	
+				
+			<input type="text" th:field="*{dimensione}" class="form-control" name = "dimensione" placeholder = "dimensione"/>
+				<div style="clear: both; display: block; height: 10px;"></div>	
+				
+			<!--  <input type="text" th:field="*{autore}" class="form-control"/>
+				<div style="clear: both; display: block; height: 10px;"></div>-->
+			
+			<input type="submit" th:action="@{/opera}" class="btn btn-success"></input>
+		</form>
+	</div>
+	<p>
+		<a th:href="@{/adminpage}">Pagina precedente</a>
+	</p>
+</body>
+</html>
