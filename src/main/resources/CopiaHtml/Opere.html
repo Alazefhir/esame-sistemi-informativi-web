@@ -3,16 +3,40 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 	<meta charset="UTF-8"></meta>
-	<title>Layout</title>
+	<title>Lista Opere</title>
 	<meta name = "viewport" content = "width=device-width, initial-scale=1"></meta>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<style>
+         body  {
+            background-image: url("http://www.espoarte.net/wordpress/wp-content/uploads/2013/04/Valerio-Rocco-Orlando_Vedute_-2012.-Galleria-Nazionale-dArte-Moderna-e-Contemporanea-Roma-2012.jpg");
+            background-color: #cccccc;
+         }
+      </style>
 </head>
 <body>
+	<div class="container">
+		<div class="row">
+		<div class="panel panel-primary filterable">
+			<div class="panel-heading">
+				<h3 class="panel-title">Opere</h3>
+				<div class="pull-right">
+					<button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span>Filtro</button>
+				</div>
+			</div>
+	<!-- <div class ="container">
+	<div class = "dropdown"> -->
 	
-	<div class ="container">
-	<div class = "dropdown">
-	<h1>Lista Opere</h1>
-	<table>
+	<table class="table table-inverse">
+	<thead>
+		<tr class="filters">
+			<th><input type="text" class="form-control" placeholder="id"></input></th>
+			<th><input type="text" class="form-control" placeholder="titolo"></input></th>
+			<th><input type="text" class="form-control" placeholder="anno" ></input></th>
+			<th><input type="text" class="form-control" placeholder="tecnica" ></input></th>
+			<th><input type="text" class="form-control" placeholder="dimensione"></input></th>
+		</tr>
+	</thead>
+	<tbody>
 		<tr>
 			<th>Id</th>
 			<th>Titolo</th>
@@ -49,16 +73,21 @@
 				</form>
 				</td>
 			</tr>
-		</table>
-		</div>
-		</div>
+		</tbody>
+	</table>
+		
 		<div>
 			<a class="btn btn-sm btn-success" th:href="@{/opera}">Aggiungi opera</a>
 		</div>
 		<p>
-			<a th:href="@{/adminpage}">Return to main page</a>
+			<a class="btn btn-sm btn-success" th:href="@{/adminpage}">Main Page</a>
 		</p>
-		
+		<form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"></input>
+        </form>
+		</div>
+		</div>
+	</div>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>

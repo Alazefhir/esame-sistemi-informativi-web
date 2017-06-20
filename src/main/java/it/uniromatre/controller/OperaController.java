@@ -15,6 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import it.uniromatre.model.Autore;
 import it.uniromatre.model.Opera;
+import it.uniromatre.service.AutoriService;
 import it.uniromatre.service.OpereService;
 
 @Controller
@@ -22,6 +23,9 @@ public class OperaController {
 
 	@Autowired
 	OpereService operaService;
+	
+	@Autowired
+	AutoriService autService;
 	
 	@GetMapping("/opera")
     public String showForm(Opera opera) {
@@ -34,6 +38,7 @@ public class OperaController {
 			return "FormOpera";
 		}
 		operaService.inserisci(opera);
+		model.addAttribute("autori", autService.getAll());
 		model.addAttribute("opere", operaService.getAll());
 		return "Opere";
 	}
@@ -65,5 +70,10 @@ public class OperaController {
 		opera.setAutore(autore);
 		model.addAttribute("opere", operaService.getAll());
 		return "ListOpere";
+	}
+	
+	@RequestMapping("/opera/find")
+	public void FindOperaByAttribute(String titolo) {
+		operaService.getByAttribute(titolo);
 	}
 }

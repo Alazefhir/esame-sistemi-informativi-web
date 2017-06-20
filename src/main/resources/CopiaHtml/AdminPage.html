@@ -6,20 +6,25 @@
 	<meta charset="UTF-8"></meta>
 	<meta name = "viewport" content = "width=device-width, initial-scale=1"></meta>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
-	
-	
+	<style>
+         body  {
+            background-image: url("http://www.espoarte.net/wordpress/wp-content/uploads/2013/04/Valerio-Rocco-Orlando_Vedute_-2012.-Galleria-Nazionale-dArte-Moderna-e-Contemporanea-Roma-2012.jpg");
+            background-color: #cccccc;
+         }
+      </style>	
 </head>
 <body>
 	
 	<nav class="navbar navbar-inverse">
  	 <div class="container-fluid">
    	 <div class="navbar-header">
-     	 <a class="navbar-brand" href="#">Pagina admin</a>
+     	 <a class="navbar-brand" href="/">Pagina admin</a>
    		 </div>
 			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li> 
+				<li class="active"><a href="/">Home</a></li> 
 			</ul>
 		</div>
+		
 	</nav>
 
 	<div class ="container">
@@ -35,6 +40,9 @@
 				<li><a href="#">cerca autore</a></li>
 				<li><a href="/autore">inserisci autore</a></li>
 			</ul>
+			<form th:action="@{/logout}" method="post">
+            	<input type="submit" value="Sign Out"></input>
+        	</form>
 		</div>
 	</div>
 	
