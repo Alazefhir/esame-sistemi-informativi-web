@@ -1,0 +1,64 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8"></meta>
+	<title>Visualizza Opere</title>
+	<meta name = "viewport" content = "width=device-width, initial-scale=1"></meta>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+	<style>
+         body  {
+            background-image: url("http://www.espoarte.net/wordpress/wp-content/uploads/2013/04/Valerio-Rocco-Orlando_Vedute_-2012.-Galleria-Nazionale-dArte-Moderna-e-Contemporanea-Roma-2012.jpg");
+            background-color: #cccccc;
+         }
+      </style>
+</head>
+<body>
+<div class="container">
+	<div class="row">
+	<div class="panel panel-primary filterable">
+		<div class="panel-heading">
+				<h1 class="panel-title">Lista Opere</h1>
+			<div class="pull-right">
+				<button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span>Filtro</button>
+			</div>
+		</div>
+		<table class="table table-inverse">
+		<thead>
+		<tr class="filters">
+			 <th><input type="text" class="form-control" placeholder="id"></input></th>
+			 <th><input type="text" class="form-control" placeholder="titolo"></input></th>
+			 <th><input type="text" class="form-control" placeholder="anno"></input></th>
+			 <th><input type="text" class="form-control" placeholder="tecnica"></input></th>
+			 <th><input type="text" class="form-control" placeholder="dimensione"></input></th>
+			 <th><input type="text" class="form-control" placeholder="autore"></input></th>
+		</tr>
+		<tr>
+			<th>Id</th>
+			<th>Titolo</th>
+			<th>Anno</th>
+			<th>tecnica</th>
+			<th>dimensione</th>
+			<th>autore</th>
+		</tr>
+		</thead>
+		<tbody>
+		<tr th:each="opera: ${opere}">
+			<td th:text="${opera.getId()}"></td>
+			<td th:text="${opera.getTitolo()}"></td>
+			<td th:text="${opera.getAnno()}"></td>
+			<td th:text="${opera.getTecnica()}"></td>
+			<td th:text="${opera.getDimensione()}"></td>
+			<td th:text="${opera.getAutore()}"></td>
+		</tr>
+		</tbody>
+		</table>
+		<form th:action="@{/logout}" method="post">
+            <input type="submit" value="Sign Out"></input>
+        </form>
+	</div>
+	</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+ 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -38,6 +38,7 @@ public class OperaController {
 			return "FormOpera";
 		}
 		operaService.inserisci(opera);
+		model.addAttribute("autori", autService.getAll());
 		model.addAttribute("opere", operaService.getAll());
 		model.addAttribute("autori", autService.getAll());
 		return "Opere";
@@ -71,23 +72,16 @@ public class OperaController {
 		
 		Opera opera = (Opera) operaService.getOne(idopera);
 		Autore autore = (Autore) autService.getOne(idautore);
-		if (opera!=null)
+
 			opera.setAutore(autore);
-		else{
-			System.out.println();System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println("è nullo, signore.");
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println();
-			System.out.println();
-		}
+		
 		model.addAttribute("opere", operaService.getAll());
 		model.addAttribute("autori", autService.getAll());
 		return "Opere";
+	}
+	
+	@RequestMapping("/opera/find")
+	public void FindOperaByAttribute(String titolo) {
+		operaService.getByAttribute(titolo);
 	}
 }
