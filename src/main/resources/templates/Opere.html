@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8"></meta>
+<title>Gestione opere</title>
+<meta name="viewport" content="width=device-width, initial-scale=1"></meta>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"></link>
+<script src="https://www.w3schools.com/lib/w3.js"></script>
+</head>
+<body>
+	<div w3-include-html="/nav"></div>
+	<div class="col-md-12">
+		<div class="page-header">
+			<h1 class="text-center">Opere</h1>
+		</div>
+	</div>
+	<div class="container">
+		<div class="row content">
+			<table class="table table-inverse">
+				<thead>
+				</thead>
+				<tbody>
+					<tr>
+						<th>Id</th>
+						<th>Titolo</th>
+						<th>Anno</th>
+						<th>tecnica</th>
+						<th>dimensione</th>
+						<th>autore</th>
+					</tr>
+					<tr th:each="opera: ${opere}">
+						<td th:text="${opera.id}"></td>
+						<td th:text="${opera.titolo}"></td>
+						<td th:text="${opera.anno}"></td>
+						<td th:text="${opera.tecnica}"></td>
+						<td th:text="${opera.dimensione}"></td>
+						<td th:text="${opera.autore}"></td>
+						<td><a th:href="@{'/opera/edit/' + ${opera.id} }">Modifica</a></td>
+						<td><a th:href="@{'/opera/delete/' + ${opera.id} }">Cancella</a></td>
+
+						<td><div class="dropdown">
+								<form action="#" method="post">
+									<button class="btn btn-primary dropdown-toggle" type="button"
+										data-toggle="dropdown">
+										Assegna autore <span class="caret"></span>
+									</button>
+									<ul class="dropdown-menu">
+										<li th:each="autore: ${autori}"><a
+											th:href="@{'/opera/assign/' + ${autore.id} + '_' + ${opera.id}}"
+											th:text="${autore.nome}"></a></li>
+									</ul>
+								</form>
+							</div></td>
+					</tr>
+				</tbody>
+			</table>
+
+			<div>
+				<a class="btn btn-lg btn-primary" th:href="@{/opera}">Aggiungi
+					opera</a>
+			</div>
+		</div>
+	</div>
+	<script>w3.includeHTML();</script>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
