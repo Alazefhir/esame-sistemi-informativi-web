@@ -1,5 +1,6 @@
 package it.uniromatre.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import it.uniromatre.model.Autore;
 import it.uniromatre.model.Opera;
+import it.uniromatre.service.AutoriService;
 import it.uniromatre.service.OpereService;
 
 @Controller
@@ -22,6 +24,8 @@ public class OperaController {
 
 	@Autowired
 	OpereService operaService;
+	@Autowired
+	AutoriService autService;
 	
 	@GetMapping("/opera")
     public String showForm(Opera opera) {
@@ -35,12 +39,14 @@ public class OperaController {
 		}
 		operaService.inserisci(opera);
 		model.addAttribute("opere", operaService.getAll());
+		model.addAttribute("autori", autService.getAll());
 		return "Opere";
 	}
 	
 	@GetMapping("/getAllOpere")
 	public String getAllOpere(Model model) {
 		model.addAttribute("opere", operaService.getAll());
+		model.addAttribute("autori", autService.getAll());
 		return "Opere";
 	}
 	
@@ -48,6 +54,7 @@ public class OperaController {
 	public String deleteOpera(@PathVariable("id") Long id, Model model) {
 		operaService.delete(id);
 		model.addAttribute("opere", operaService.getAll());
+		model.addAttribute("autori", autService.getAll());
 		return "Opere";
 	}
 	
@@ -58,12 +65,29 @@ public class OperaController {
 		return "FormOpera";
 	}
 	
-	@RequestMapping("/opera/assign/{autore}{opera}")
-	public String assegnaAutore(@PathVariable("autore") @ModelAttribute Autore autore,
-			@PathVariable("opera") @ModelAttribute Opera opera,Model model){
+	@RequestMapping("/opera/assign/{idautore}_{idopera}")
+	public String assegnaAutore( @PathVariable("idautore") Long idautore, @PathVariable("idopera") Long idopera ,
+			Model model,  HttpServletRequest request){
 		
-		opera.setAutore(autore);
+		Opera opera = (Opera) operaService.getOne(idopera);
+		Autore autore = (Autore) autService.getOne(idautore);
+		if (opera!=null)
+			opera.setAutore(autore);
+		else{
+			System.out.println();System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println("è nullo, signore.");
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+			System.out.println();
+		}
 		model.addAttribute("opere", operaService.getAll());
-		return "ListOpere";
+		model.addAttribute("autori", autService.getAll());
+		return "Opere";
 	}
 }

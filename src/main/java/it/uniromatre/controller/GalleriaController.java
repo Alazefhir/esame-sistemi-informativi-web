@@ -41,4 +41,10 @@ public class GalleriaController {
 		model.addAttribute("opere",opService.getAll());
 		return "ListOpere";
 	}
+	
+	//mapping degli import, una request per ogni import?
+	@RequestMapping ("/nav")
+	public String importHtml(){
+		return "navbar";
+	}
 }

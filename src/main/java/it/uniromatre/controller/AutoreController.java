@@ -56,7 +56,7 @@ public class AutoreController {
 	public String editAutore(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("autore", autService.getOne(id));
 		model.addAttribute("autori", autService.getAll());
-		return "Autori";
+		return "FormAutore";
 	}
 	
 	

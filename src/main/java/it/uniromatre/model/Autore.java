@@ -110,17 +110,24 @@ public class Autore {
 	
 	@Override
 	public String toString(){
-		String opereString = new String();
+		return "nome: " + this.nome + " id: " + this.id +
+				"cognome: " + this.cognome + "nazionalità: " + this.nazionalita +
+				"data di nascita: " + this.dataNascita + 
+				"data di morte: " + this.dataMorte; 
+	}
+	
+	public String toStringPlain(){
+String opereString = new String();
 		
 		for(Opera operaIterabile: this.opera){
 			opereString = opereString + operaIterabile.toStringPlain();
 		}
 		
-		return "nome: " + this.nome + " id: " + this.id + " opere autore: " + opereString;
-	}
-	
-	public String toStringPlain(){
-		return "nome: " + this.nome + " id: " + this.id; 
+		return "nome: " + this.nome + " id: " + this.id + 
+				" cognome: " + this.cognome + " nazionalità: " + this.nazionalita +
+				" data di nascita: " + this.dataNascita + 
+				" data di morte: " + this.dataMorte + 
+				" opere autore: " + opereString;
 	}
 	
 	@PreRemove
